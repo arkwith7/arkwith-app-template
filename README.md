@@ -16,9 +16,20 @@ A development project start template that links the Restful API of the back-end(
 
 To use this project, follow these steps:
 
-1. Create your working environment.
-2. Use git to clone the template from github.
-3. Enabling the back-end,front-end development environment. 
+- Clone it
+- `$ git clone https://github.com/arkwith7/arkwith-app-template.git`
+- Create a virtual env for this project
+- `$ cd arkwith-app-template`
+- `$ pipenv install`
+- `$ pipenv shell`
+- Configure the development and execution environment.
+- `$ cd ark-template`
+- `$ pip install -r requirements.txt`
+- `$ cd app-template/frontend`
+- `$ npm install`
+- `$ npm run start`
+- Move to app-template directory, upper directory of current frontend directory
+- `$ python manage.py runserver`
 
 
 ## License
@@ -29,4 +40,5 @@ To use this project, follow these steps:
 
 ## Further Reading
 
-- 
+- [Modern Django.](http://v1k45.com/blog/modern-django-part-1-setting-up-django-and-react/)
+
