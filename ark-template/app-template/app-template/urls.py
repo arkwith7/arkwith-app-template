@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
 
-from notes import endpoints
+from backend import endpoints
 
 urlpatterns = [
     url(r'^api/', include(endpoints)),

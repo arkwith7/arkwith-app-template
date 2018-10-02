@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'knox',
 
-    'notes.apps.NotesConfig',
+    'backend.apps.BackendConfig',
 ]
 
 MIDDLEWARE = [

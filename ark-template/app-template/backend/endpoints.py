@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from rest_framework import routers
 
-from .api import NoteViewSet, RegistrationAPI, LoginAPI, UserAPI
+from .api import NoteViewSet, RegistrationAPI, LoginAPI, UserAPI, TranslatorAPI
 
 router = routers.DefaultRouter()
 router.register('notes', NoteViewSet, 'notes')
@@ -11,4 +11,6 @@ urlpatterns = [
     url("^auth/register/$", RegistrationAPI.as_view()),
     url("^auth/login/$", LoginAPI.as_view()),
     url("^auth/user/$", UserAPI.as_view()),
+    # URL for NAVER Translation API
+    url("^translation", TranslatorAPI.as_view()),
 ]
