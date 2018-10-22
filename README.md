@@ -6,6 +6,10 @@ A development project start template that links the Restful API of the back-end(
 
 チャットアプリケーション制作のためにDjango Rest Frameworkで作成されたRestfull APIをReactと連携して開発することができるようにするプロジェクトスタートテンプレート。
 
+## Prerequisites
+
+We assume you have experience with back-end and front-end Web applications using Python Django and React. It is assumed that the Python 3 and Node.js development environments have already been installed. However, even if you are not experienced in coding web applications into Python Django and React, you will be able to install and use arkwith-app-template by referring to the following reference and additional reading material.
+
 ## Features
 
 - 채팅 기반 어플리케이션 제작을 위한 백엔드와 프런트엔드의 연계 방안 제시
@@ -38,7 +42,12 @@ To use this project, follow these steps:
 
 [MIT]: ./LICENSE "Mit License"
 
-## Further Reading
+## Reference & Further Reading
 
 - [Modern Django.](http://v1k45.com/blog/modern-django-part-1-setting-up-django-and-react/)
+- [Django REST framework](https://www.django-rest-framework.org/)
+- [React](https://reactjs.org/docs/getting-started.html)
+- [Redux: Read Me](https://redux.js.org/)
+- [Web Speech API Specification](https://w3c.github.io/speech-api/speechapi.html)
+- [Web Speech API(react-voice-components)](https://github.com/grvcoelho/react-voice-components)
 

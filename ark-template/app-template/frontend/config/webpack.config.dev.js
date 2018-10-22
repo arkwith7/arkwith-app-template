@@ -11,15 +11,18 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
+// appended for integrating with Python Django
 const BundleTracker = require('webpack-bundle-tracker');
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
+// appended for integrating with Python Django
 const publicPath = 'http://localhost:3000/';
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
+// appended for integrating with Python Django
 const publicUrl = 'http://localhost:3000/';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
@@ -45,6 +48,7 @@ module.exports = {
     // Note: instead of the default WebpackDevServer client, we use a custom one
     // to bring better experience for Create React App users. You can replace
     // the line below with these two lines if you prefer the stock client:
+    // appended for integrating with Python Django
     require.resolve('webpack-dev-server/client') + '?http://localhost:3000',
     require.resolve('webpack/hot/dev-server'),
     // require.resolve('react-dev-utils/webpackHotDevClient'),
@@ -247,6 +251,7 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    // appended for integrating with Python Django
     new BundleTracker({path: paths.statsRoot, filename: 'webpack-stats.dev.json'}),
   ],
   // Some libraries import Node modules but don't use them in the browser.

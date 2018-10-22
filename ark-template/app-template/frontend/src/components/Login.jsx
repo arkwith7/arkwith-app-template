@@ -5,6 +5,8 @@ import {Link, Redirect} from "react-router-dom";
 
 import {auth} from "../actions";
 
+import { Container, Row, Col, Card, CardHeader, CardBody, Button, Form, FormGroup, Input } from 'reactstrap';
+
 class Login extends Component {
 
     state = {
@@ -19,40 +21,51 @@ class Login extends Component {
 
     render() {
         if (this.props.isAuthenticated) {
-            return <Redirect to="/" />
+            return <Redirect to="/note" />
         }
         return (
-            <form onSubmit={this.onSubmit}>
-                <fieldset>
-                    <legend>Login</legend>
-                    {this.props.errors.length > 0 && (
-                        <ul>
-                            {this.props.errors.map(error => (
-                                <li key={error.field}>{error.message}</li>
-                            ))}
-                        </ul>
-                    )}
+
+        <Container>
+          <Row>
+            <Col md={{ size: 4, offset: 4 }}>
+                 
+            <Card className="login-panel panel panel-default">
+            <CardHeader className="panel-heading" tag="h3">Please Sign In</CardHeader>
+            <CardBody className="panel-body">
+  
+                <Form onSubmit={this.onSubmit}>
+
                     <p>
-                        <label htmlFor="username">Username</label>
-                        <input
-                            type="text" id="username"
-                            onChange={e => this.setState({username: e.target.value})} />
-                    </p>
-                    <p>
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password" id="password"
-                            onChange={e => this.setState({password: e.target.value})} />
-                    </p>
-                    <p>
-                        <button type="submit">Login</button>
+                        {this.props.errors.length > 0 && (
+                            <ul>
+                                {this.props.errors.map(error => (
+                                    <li key={error.field}>{error.message}</li>
+                                ))}
+                            </ul>
+                        )}
                     </p>
 
+                    <FormGroup>
+                        <Input type="text" name="username" id="username" placeholder="Username"
+                        onChange={e => this.setState({username: e.target.value})} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Input type="password" name="password" id="password" placeholder="Password"
+                        onChange={e => this.setState({password: e.target.value})} />
+                    </FormGroup>
+                    <Button type="submit" className="btn btn-lg btn-success btn-block" bsStyle="success" block>Login</Button>
                     <p>
                         Don't have an account? <Link to="/register">Register</Link>
                     </p>
-                </fieldset>
-            </form>
+                </Form>
+
+            </CardBody>
+            </Card>
+
+            </Col>
+          </Row>
+        </Container>
+
         )
     }
 }

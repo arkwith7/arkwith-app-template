@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 
 import {Link, Redirect} from "react-router-dom";
 
+import { Container, Row, Col, Card, CardHeader, CardBody, Button, Form, FormGroup, Input } from 'reactstrap';
+
 import {auth} from "../actions";
 
 class Login extends Component {
@@ -22,9 +24,16 @@ class Login extends Component {
             return <Redirect to="/" />
         }
         return (
-            <form onSubmit={this.onSubmit}>
-                <fieldset>
-                    <legend>Register</legend>
+        
+        <Container>
+          <Row>
+            <Col md={{ size: 4, offset: 4 }}>
+                   
+            <Card className="login-panel panel panel-default">
+            <CardHeader className="panel-heading" tag="h3">User registration</CardHeader>
+            <CardBody className="panel-body">
+  
+            <Form onSubmit={this.onSubmit}>
                     {this.props.errors.length > 0 && (
                         <ul>
                             {this.props.errors.map(error => (
@@ -32,27 +41,27 @@ class Login extends Component {
                             ))}
                         </ul>
                     )}
-                    <p>
-                        <label htmlFor="username">Username</label>
-                        <input
-                            type="text" id="username"
+                    <FormGroup>
+                        <Input type="text" name="username" id="username" placeholder="Username"
                             onChange={e => this.setState({username: e.target.value})} />
-                    </p>
-                    <p>
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password" id="password"
+                    </FormGroup>
+                    <FormGroup>
+                        <Input type="password" name="password" id="password" placeholder="Password"
                             onChange={e => this.setState({password: e.target.value})} />
-                    </p>
-                    <p>
-                        <button type="submit">Register</button>
-                    </p>
+                    </FormGroup>
+                    <Button type="submit" className="btn btn-lg btn-success btn-block" bsStyle="success" block>Register</Button>
 
                     <p>
                         Already have an account? <Link to="/login">Login</Link>
                     </p>
-                </fieldset>
-            </form>
+            </Form>
+            </CardBody>
+            </Card>
+
+            </Col>
+          </Row>
+        </Container>
+
         )
     }
 }

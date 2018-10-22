@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import notes from "./notes";
 import auth from "./auth";
+import chats from "./chats";
+import tabs from "./tabs";
 
 
-const ponyApp = combineReducers({
-    notes, auth,
+const templateApp = combineReducers({
+    notes, auth, chats, tabs,
 })
 
-export default ponyApp;
+export default templateApp;

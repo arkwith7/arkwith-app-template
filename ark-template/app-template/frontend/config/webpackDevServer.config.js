@@ -70,6 +70,7 @@ module.exports = function(proxy, allowedHost) {
     // Enable HTTPS if the HTTPS environment variable is set to 'true'
     https: protocol === 'https',
     host: host,
+    // appended for integrating with Python Django
     headers: {
       'Access-Control-Allow-Origin': '*'
     },

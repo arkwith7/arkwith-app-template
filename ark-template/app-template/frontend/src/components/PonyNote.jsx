@@ -37,7 +37,7 @@ class PonyNote extends Component {
     render() {
         return (
             <div>
-                <h2>Welcome to PonyNote!</h2>
+                <h2>Welcome to Note!</h2>
                 <hr />
                 <div style={{textAlign: "right"}}>
                     {this.props.user.username} (<a onClick={this.props.logout}>logout</a>)
