@@ -1,17 +1,19 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 
-import {Link, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 import { Container, Row, Col, Card, CardHeader, CardBody, Button, Form, FormGroup, Input } from 'reactstrap';
 
 import {auth} from "../actions";
+import Login from "./Login";
 
-class Login extends Component {
+class Register extends Component {
 
     state = {
         username: "",
         password: "",
+        callLogin: false,
     }
 
     onSubmit = e => {
@@ -19,9 +21,19 @@ class Login extends Component {
         this.props.register(this.state.username, this.state.password);
     }
 
+    handleClick = (e) => {
+        e.preventDefault();
+        // console.log('The link was clicked.');
+        this.setState({callLogin: true });
+
+    };
+
     render() {
         if (this.props.isAuthenticated) {
             return <Redirect to="/" />
+        }
+        if (this.state.callLogin) {
+            return <Login />
         }
         return (
         
@@ -49,10 +61,14 @@ class Login extends Component {
                         <Input type="password" name="password" id="password" placeholder="Password"
                             onChange={e => this.setState({password: e.target.value})} />
                     </FormGroup>
-                    <Button type="submit" className="btn btn-lg btn-success btn-block" bsStyle="success" block>Register</Button>
+                    <Button type="submit" className="btn btn-lg btn-success btn-block" >Register</Button>
 
+                    <br/>
                     <p>
+                        {/* 
                         Already have an account? <Link to="/login">Login</Link>
+                        */}
+                        Already have an account? <a href="#" onClick={(e) => {this.handleClick(e)}}>Login</a>
                     </p>
             </Form>
             </CardBody>
@@ -85,4 +101,4 @@ const mapDispatchToProps = dispatch => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

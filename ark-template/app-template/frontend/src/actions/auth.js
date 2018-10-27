@@ -99,6 +99,10 @@ export const register = (username, password) => {
 export const logout = () => {
     return (dispatch, getState) => {
         let headers = {"Content-Type": "application/json"};
+        const token = getState().auth.token;
+        if (token) {
+            headers["Authorization"] = `Token ${token}`;
+        }
 
         return fetch("/api/auth/logout/", {headers, body: "", method: "POST"})
             .then(res => {

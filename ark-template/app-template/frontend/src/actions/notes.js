@@ -72,7 +72,7 @@ export const updateNote = (index, text) => {
         }
 
         let body = JSON.stringify({text, });
-        let noteId = getState().notes[index].id;
+        let noteId = getState().notes.noteList[index].id;
 
         return fetch(`/api/notes/${noteId}/`, {headers, method: "PUT", body})
             .then(res => {
@@ -106,7 +106,7 @@ export const deleteNote = index => {
             headers["Authorization"] = `Token ${token}`;
         }
 
-        let noteId = getState().notes[index].id;
+        let noteId = getState().notes.noteList[index].id;
 
         return fetch(`/api/notes/${noteId}/`, {headers, method: "DELETE"})
             .then(res => {
@@ -130,4 +130,12 @@ export const deleteNote = index => {
                 }
             })
     }
+}
+
+export const onChangePage = pageOfItems => {
+    return {
+        type: 'ON_CHANGE_PAGE',
+        pageOfItems,
+      }
+    
 }

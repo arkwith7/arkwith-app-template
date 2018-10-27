@@ -5,6 +5,10 @@ const initialState = {
         selectedSourceLanguage: 'ko',
         selectedTargetLanguage: 'en',
     },
+    translationStatus: {
+        code: '',
+        message: '',
+    },
     chatList: [],
 };
 
@@ -28,28 +32,28 @@ export default function chats(state=initialState, action) {
     switch (action.type) {
 
         case 'OPEN_DROPDOWN':
-            console.log("action.dropdownOpen :",state.dropdownOpen);
+            //console.log("action.dropdownOpen :",state.dropdownOpen);
             return {...state, dropdownOpen: !state.dropdownOpen };
 
         case 'RESTART_CHATTING':
         return {...state, chatList: [] };
 
         case 'OPEN_MODAL':
-            console.log("action.openModal :",state.modal);
+            //console.log("action.openModal :",state.modal);
             return {...state, modal: !state.modal };
 
-        case 'SELECTED_SOURCE_LANG':
-            console.log("action.selectedSourceLang :",action.sourceLang);
-            console.log("action.selectedTargetLang :",state.translationSettings.selectedTargetLanguage);
+        case 'SET_SOURCE_LANG':
+            //console.log("action.setSourceLang :",action.sourceLang);
+            //console.log("action.setTargetLang :",state.translationSettings.selectedTargetLanguage);
             return {...state, 
                 translationSettings: {
                     selectedSourceLanguage: action.sourceLang,
                     selectedTargetLanguage: state.translationSettings.selectedTargetLanguage
                 } };
 
-        case 'SELECTED_TARGET_LANG':
-            console.log("action.selectedSourceLang :",state.translationSettings.selectedSourceLanguage);
-            console.log("action.selectedTargetLang :",action.targetLang);
+        case 'SET_TARGET_LANG':
+            //console.log("action.setSourceLang :",state.translationSettings.selectedSourceLanguage);
+            //console.log("action.setTargetLang :",action.targetLang);
             return {...state, 
                 translationSettings: {
                     selectedSourceLanguage: state.translationSettings.selectedSourceLanguage,
@@ -57,7 +61,7 @@ export default function chats(state=initialState, action) {
                 } };
 
         case 'REQUEST_TRANSLATION':
-            console.log("content :",action.message);
+            //console.log("content :",action.message);
             return {...state, 
                 chatList: state.chatList.concat({
                     username: action.username,
@@ -69,11 +73,26 @@ export default function chats(state=initialState, action) {
 
         case 'GET_TRANSLATION':
             return {...state, 
+                translationStatus: {
+                    code: action.statusCode,
+                    message: action.statusMessage
+                },
                 chatList: state.chatList.concat({
                     username: "Translator Bot",
                     messageTime: currentTime(), 
                     content: action.message
                 }) 
+            };
+
+        case 'SERVER_ERROR':
+        case 'AUTHENTICATION_ERROR':
+            //console.log("SERVER_ERROR action.statusCode :",action.statusCode);
+            //console.log("SERVER_ERROR action.data :",action.data);
+            return {...state, 
+                translationStatus: {
+                    code: action.statusCode,
+                    message: action.statusMessage
+                }
             };
 
         case 'SPEECH_TO_TEXT':

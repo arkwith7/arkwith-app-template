@@ -30,37 +30,30 @@ export const getTranslation = (source, target, message) => {
           })
         } else {
           console.log("Server Error!");
-          throw res;
+          //throw res;
+          return dispatch({type: "SERVER_ERROR",
+                            data: res.data, 
+                            statusCode: res.status,
+                            statusMessage: 'Server Error!'
+                          });
         }
       })
       .then(res => {
         if (res.status === 200) {
-          return dispatch({type: 'GET_TRANSLATION', message: res.data});
+          return dispatch({type: 'GET_TRANSLATION', 
+                            message: res.data, 
+                            statusCode: res.status,
+                            statusMessage: 'success'
+                          });
         } else if (res.status === 401 || res.status === 403) {
-          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
-          throw res.data;
+          return dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          //throw res.data;
         }
+        
       })
   }
+}
 
-
-}
-//speech recognition
-export const speechRecognition = (username, text) => {
-  return {
-    type: 'SPEECH_TO_TEXT',
-    username,
-    text,
-  }
-}
-//speech synthesis
-export const speechSynthesis = (username, text) => {
-  return {
-    type: 'TEXT_TO_SPEECH',
-    username,
-    text,
-  }
-}
 
 //Restart chatting
 export const restartChatting = () => {
@@ -76,17 +69,17 @@ export const openModal = () => {
   }
 }
 
-//Select Translation Source Language
-export const selectedSourceLang = (sourceLang) => {
+//Set Translation Source Language
+export const setSourceLang = (sourceLang) => {
   return {
-    type: 'SELECTED_SOURCE_LANG',
+    type: 'SET_SOURCE_LANG',
     sourceLang,
   }
 }
-//Select Translation Target Language
-export const selectedTargetLang = (targetLang) => {
+//Set Translation Target Language
+export const setTargetLang = (targetLang) => {
   return {
-    type: 'SELECTED_TARGET_LANG',
+    type: 'SET_TARGET_LANG',
     targetLang,
   }
 }
