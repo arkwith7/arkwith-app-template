@@ -16,15 +16,19 @@ We assume you have experience with back-end and front-end Web applications using
 
 ## Features
 
-- 채팅 기반 어플리케이션 제작을 위한 백엔드와 프런트엔드의 연계 방안 제시
-- チャットプログラムを作成するためのバックエンドとフロントエンドの連携方策提示
-- Suggest linkage between backend and front end for chat program creation
-- 제사용성 및 개발 생산성 향상을 위한 아키텍처 구성.
-- 第使いやすさと開発の生産性向上のためのアーキテクチャを構成する。
-- An architectural guide to improving program reuse and development productivity.
-- 채팅 어플리케이션을 활용하기 위한 다양한 디바이스 고려(스마트폰, 테블릿, PC등)
-- チャットアプリケーションを活用するための様々なデバイスを考慮（スマートフォン、タブレット、PCなど）
-- Consider various devices to use chat program (smartphone, tablet, PC etc)
+>- 채팅 기반 어플리케이션 제작을 위한 백엔드와 프런트엔드의 연계 방안 제시
+>- 제사용성 및 개발 생산성 향상을 위한 아키텍처 구성.
+>- 채팅 어플리케이션을 활용하기 위한 다양한 디바이스 고려(스마트폰, 테블릿, PC등)
+
+
+>- チャットプログラムを作成するためのバックエンドとフロントエンドの連携方策提示
+>- 第使いやすさと開発の生産性向上のためのアーキテクチャを構成する。
+>- チャットアプリケーションを活用するための様々なデバイスを考慮（スマートフォン、タブレット、PCなど）
+
+>- Suggestions for connecting to the back-end and front-end for chat programs.
+>- An architectural guide to improving program reuse and development productivity.
+>- Consider various devices to use chat program (smartphone, tablet, PC etc)
+
 ## How to Use
 
 To use this project, follow these steps:
