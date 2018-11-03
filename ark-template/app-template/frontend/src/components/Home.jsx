@@ -9,7 +9,7 @@ export default class Home extends Component {
         return (
     <div>
     <div className="jumbotron text-center" style={{marginBottom: 0}} >
-     <h1>Arkwith Application Starter Template</h1>
+     <h1>Arkwith Starter Template for FullStact developer</h1>
      <p>Seek after difference!</p> 
     </div>
 
