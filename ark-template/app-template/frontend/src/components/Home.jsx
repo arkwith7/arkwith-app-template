@@ -105,31 +105,213 @@ export default class Home extends Component {
         <h5>Screenshot</h5>
         <p>Execute as above and open the browser and enter http://127.0.0.1:8000/ in the address bar. Then the following screen is displayed.</p>
         <div className="thumbnail">
-         <p><strong>Home tab</strong></p>
+         <p><em>Home tab</em></p>
          <p>This is the screen displayed on the Home tab.</p>
-         <img src={homeImage} alt="Home" width="600" height="400"/>
+         <img src={homeImage} alt="Home" style={{"width": "100%"}}/>
         </div>
         <br/>
         <div className="thumbnail">
-         <p><strong>Chat Translator</strong></p>
+         <p><em>Chat Translator</em></p>
          <p>This is the screen displayed on the Chat Translator tab.</p>
-         <img src={chatImage} alt="Chat Translator" width="600" height="400"/>
+         <img src={chatImage} alt="Chat Translator" style={{"width":"100%"}}/>
         </div>
         <br/>
         <div className="thumbnail">
-         <p><strong>CRUD Sample App. tab</strong></p>
+         <p><em>CRUD Sample App. tab</em></p>
          <p>This is the screen displayed on the CRUD Sample App. tab.</p>
-         <img src={crudImage} alt="CRUD Sample App." width="600" height="400"/>
+         <img src={crudImage} alt="CRUD Sample App." style={{"width":"100%"}}/>
         </div>
         <br/>
+
+        <h5>Describe key components.(Directory structure.)</h5>
+        <div className="table-responsive">
+         <table className="table table-condensed">
+            <thead> 
+            </thead>
+            <tbody>
+<ul>
+    <li>
+             <tr>
+              <td><p class="fa fa-folder-open">ark-template</p></td>
+              <td>The root directory cloned from github.</td>
+             </tr>
+        <ul>
+            <li>                
+             <tr>
+              <td><p class="fa fa-folder-open">ark-template</p></td>
+              <td>Root directory is just a container for your project. you can rename it to anything you like.</td>
+             </tr>
+                <ul>
+                    <li>
+             <tr>
+              <td><p class="fa fa-folder-open">app-template</p></td>
+              <td>Django project called app-template created using django-admin tool.</td>
+             </tr>
+                        <ul>
+                            <li>
+             <tr>
+              <td><p class="fa fa-folder-open">app-template</p></td>
+              <td>Django application called app-template in the project.</td>
+             </tr>
+                            </li>
+                                    <ul>
+                                        <li>
+             <tr>
+              <td><p class="fa fa-file-code-o">settings.py</p></td>
+              <td>Settings/configuration for this Django project.</td>
+             </tr>
+                                        </li>
+                                        <li>
+             <tr>
+              <td><p class="fa fa-file-code-o">urls.py</p></td>
+              <td>The URL declarations for this Django project</td>
+             </tr>
+                                        </li>
+                                    </ul>
+                            <li>
+             <tr>
+              <td><p class="fa fa-folder-open">backend</p></td>
+              <td>Django application called backend for the Restful API in server side Back-End area.</td>
+             </tr>
+                            </li>
+                                <ul>
+                                    <li>
+             <tr>
+              <td><p class="fa fa-file-code-o">api.py</p></td>
+              <td>Define API views using our serializer class for our RESTful API</td>
+             </tr>
+                                    </li>
+                                    <li>
+             <tr>
+              <td><p class="fa fa-file-code-o">endpoints.py</p></td>
+              <td>Configure our urls using API views</td>
+             </tr>
+                                    </li>
+                                    <li>
+             <tr>
+              <td><p class="fa fa-file-code-o">models.py</p></td>
+              <td>Define our database models, which Django automatically translates into database tables</td>
+             </tr>
+                                    </li>
+                                    <li>
+             <tr>
+              <td><p class="fa fa-file-code-o">serializers.py</p></td>
+              <td>Define Serializers that can convert complex data such as querysets and model instances into native Python data types that can be easily rendered as JSON, XML, or other content types.</td>
+             </tr>
+                                    </li>
+                                    <li>
+             <tr>
+              <td><p class="fa fa-file-code-o">translator.py</p></td>
+              <td>Language translation python object that uses the NAVER translation API.</td>
+             </tr>
+                                    </li>
+                                </ul>
+                            <li>
+             <tr>
+              <td><p class="fa fa-folder-open">frontend</p></td>
+              <td>React application called frontend created by create-react-app as client side Front-End area.</td>
+             </tr>
+                                    <ul>
+                                        <li>
+             <tr>
+              <td><p class="fa fa-folder-open">src</p></td>
+              <td>In an application that uses both React and Redux, Directory of program source file for React App.</td>
+             </tr>
+                                            <ul>
+                                                <li>
+             <tr>
+              <td><p class="fa fa-folder-open">actions</p></td>
+              <td>The actions directory is a folder that contains the action types used by the application and the action methods that perform tasks such as API communication.</td>
+             </tr>
+                                                </li>
+                                                <li>
+             <tr>
+              <td><p class="fa fa-folder-open">components</p></td>
+              <td>The components directory is a folder made up of React components. Components can usually be further subdivided by domain.</td>
+             </tr>
+                                                </li>
+                                                <li>
+             <tr>
+              <td><p class="fa fa-folder-open">css</p></td>
+              <td>Directory of CSS(Cascading Style Sheets) file for React components.</td>
+             </tr>
+                                                </li>
+                                                <li>
+             <tr>
+              <td><p class="fa fa-folder-open">lib</p></td>
+              <td>Directory of libraries referenced by the React components, such as Pagination, Web Speech API ...</td>
+             </tr>
+                                                </li>
+                                                <li>
+             <tr>
+              <td><p class="fa fa-folder-open">reducers</p></td>
+              <td>The reducer directory is a folder made up of reducers. The reducer receives the changed state from the action method and changes the existing state to the new state.</td>
+             </tr>
+                                                </li>
+                                                <li>
+             <tr>
+              <td><p class="fa fa-file-code-o">App.js</p></td>
+              <td>The main App JavaScript component</td>
+             </tr>
+                                                </li>
+                                                <li>
+             <tr>
+              <td><p class="fa fa-file-code-o">index.css</p></td>
+              <td>Define bootstrap and theme applied css files.</td>
+             </tr>
+                                                </li>
+                                                <li>
+             <tr>
+              <td><p class="fa fa-file-code-o">index.js</p></td>
+              <td>index.js and its styles (index.css) provide an entry into the App and also kicks off the registerServiceWorker.js.</td>
+             </tr>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                            </li>
+                            <li>
+             <tr>
+              <td><p class="fa fa-folder-open">templates</p></td>
+              <td>Template file directory such as html for Django project</td>
+             </tr>
+                            </li>
+                            <li>
+             <tr>
+              <td><p class="fa fa-file-code-o">manage.py</p></td>
+              <td>A command-line utility that lets you interact with this Django project in various ways.</td>
+             </tr>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+             <tr>
+              <td><p class="fa fa-file">requirements.txt</p></td>
+              <td>A list of python module files that need to be installed for this project.</td>
+             </tr>
+                    </li>
+                </ul>
+            </li>
+            <li>
+             <tr>
+              <td><p class="fa fa-file">README.md</p></td>
+              <td>A readme file that describes this project in github.</td>
+             </tr>
+            </li>
+        </ul>
+    </li>
+</ul>
+            </tbody>
+         </table>
+        </div>
 
       </div>
      </div>
     </div>
 
     <div className="jumbotron text-center" style={{marginBottom: 0}}>
-     <p>In him the whole building is joined together and rises to become a holy temple in the Lord. And in him you too are being built together to become a dwelling in which God lives by his Spirit.(Ephesians 2:21-22)</p>
      <p>They replied, "Believe in the Lord Jesus, and you will be saved--you and your household." (Acts 16:31)</p>
+     <p>In him the whole building is joined together and rises to become a holy temple in the Lord. And in him you too are being built together to become a dwelling in which God lives by his Spirit.(Ephesians 2:21-22)</p>
     </div>
 
     </div>
