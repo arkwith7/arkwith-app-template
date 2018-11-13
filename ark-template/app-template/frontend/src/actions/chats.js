@@ -1,15 +1,10 @@
-export const dropdownButtonToggle  = () => {
-  return {
-    type: 'OPEN_DROPDOWN',
-    //dropdownOpen,
-  }
-}
 
-export const requestTranslation = (username, message) => {
+export const requestTranslation = (username, message,languageCode) => {
   return {
     type: 'REQUEST_TRANSLATION',
     username,
     message,
+    languageCode,
   }
 }
 
@@ -42,6 +37,7 @@ export const getTranslation = (source, target, message) => {
         if (res.status === 200) {
           return dispatch({type: 'GET_TRANSLATION', 
                             message: res.data, 
+                            languageCode: target, 
                             statusCode: res.status,
                             statusMessage: 'success'
                           });
@@ -59,13 +55,6 @@ export const getTranslation = (source, target, message) => {
 export const restartChatting = () => {
   return {
     type: 'RESTART_CHATTING',
-  }
-}
-
-//Open Modal
-export const openModal = () => {
-  return {
-    type: 'OPEN_MODAL',
   }
 }
 
