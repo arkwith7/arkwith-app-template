@@ -223,35 +223,7 @@ class ChatTranslator extends Component {
             message
         );
     }
-
-    // change language code from naver to google  
-    setVoiceLanguage = (selectedLanguage) => {
- 
-        if (selectedLanguage === 'ko') {
-            return 'ko-KR';
-        } else if (selectedLanguage === 'en') {
-            return 'en-US'
-        } else if (selectedLanguage === 'ja') {
-            return 'ja-JP'
-        } else if (selectedLanguage === 'zh-CN') {
-            return 'zh-CN'//'cmn-Hans-CN'
-        }
-    }
-
-    // Display current language.
-    displayCurrentLanguage = (selectedLanguage) => {
- 
-        if (selectedLanguage === 'ko') {
-            return '한국어';
-        } else if (selectedLanguage === 'en') {
-            return 'English(United States)'
-        } else if (selectedLanguage === 'ja') {
-            return '日本語'
-        } else if (selectedLanguage === 'zh-CN') {
-            return '普通话(中国大陆)'
-        }
-    }
-    
+   
     render() {
         const { classes } = this.props;
         const { anchorEl } = this.state;
@@ -269,9 +241,9 @@ class ChatTranslator extends Component {
                     Chat &nbsp;&nbsp;&nbsp;&nbsp;
                   </h4>
                   <p className={classes.cardCategoryWhite}>
-                    [{this.displayCurrentLanguage(this.state.source)}]&nbsp;
+                    [{chats.displayCurrentLanguage(this.state.source)}]&nbsp;
                     <ArrowRight/>
-                    [{this.displayCurrentLanguage(this.state.target)}]
+                    [{chats.displayCurrentLanguage(this.state.target)}]
                   </p>
                   </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
@@ -311,8 +283,6 @@ class ChatTranslator extends Component {
                     userAvatarUrl={rightAvataImage}
                     botAvatarUrl={leftAvataImage}
                   />
-{/**
- */}
                   <SendMessage 
                     classes={{ paper: classes.paper, }}
                     onSubmit={this.sendMessage}

@@ -72,3 +72,31 @@ export const setTargetLang = (targetLang) => {
     targetLang,
   }
 }
+
+// change language code from naver to google  
+export const setVoiceLanguage = (selectedLanguage) => {
+
+  if (selectedLanguage === 'ko') {
+    return 'ko-KR';
+  } else if (selectedLanguage === 'en') {
+    return 'en-US'
+  } else if (selectedLanguage === 'ja') {
+    return 'ja-JP'
+  } else if (selectedLanguage === 'zh-CN') {
+    return 'zh-CN'//'cmn-Hans-CN'
+  }
+}
+// Display current language.
+export const displayCurrentLanguage = (selectedLanguage) => {
+
+  if (selectedLanguage === 'ko') {
+    return '한국어';
+  } else if (selectedLanguage === 'en') {
+    return 'English(United States)'
+  } else if (selectedLanguage === 'ja') {
+    return '日本語'
+  } else if (selectedLanguage === 'zh-CN') {
+    return '普通话(中国大陆)'
+  }
+}
+

@@ -7,6 +7,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
 import Avatar from '@material-ui/core/Avatar';
 
+import { chats } from "../../actions";
+
 import VoicePlayer from "../../lib/VoicePlayer.js"
 
 const styles = {
@@ -69,8 +71,8 @@ const styles = {
         float: 'left'
     },
   
-    floatRight: {
-        float: 'right !important'
+    pullRight: {
+        float: 'right'
     },
   
     textMuted: {
@@ -106,126 +108,41 @@ const styles = {
 class TalkList extends React.Component {
     constructor(props) {
         super();
-        this.state = {
-            voicePlaySwitch: false,
-            listLength: 0,
-        };
-    }
-    componentDidMount() {
-        console.log("componentDidMount");
-        this.setState({listLength: this.props.chatList.length })
     }
     componentDidUpdate() {
         console.log("componentDidUpdate");
-        console.log("this.state.listLength : ", this.state.listLength);
-        console.log("this.props.chatList.length : ", this.props.chatList.length);
-        if (this.props.chatList.length > this.state.listLength) {
-            this.setState({listLength: this.props.chatList.length })
-            this.setState({voicePlaySwitch: true })
-        }
         this.scrollToBot();
     }
     scrollToBot() {
         // //스크롤이 항상 최신 대화가 보이도록 대화메시지 출력후 맨아래로 설정
         ReactDOM.findDOMNode(this.refs.panelBody).scrollTop = ReactDOM.findDOMNode(this.refs.panelBody).scrollHeight;
         //this.setState({voicePlaySwitch: true })
-        console.log("voicePlaySwitch : ",this.state.voicePlaySwitch);
-    }
-    // change language code from naver to google  
-    setVoiceLanguage = (selectedLanguage) => {
- 
-        if (selectedLanguage === 'ko') {
-            return 'ko-KR';
-        } else if (selectedLanguage === 'en') {
-            return 'en-US'
-        } else if (selectedLanguage === 'ja') {
-            return 'ja-JP'
-        } else if (selectedLanguage === 'zh-CN') {
-            return 'zh-CN'//'cmn-Hans-CN'
-        }
-    }
-    // Display current language.
-    displayCurrentLanguage = (selectedLanguage) => {
- 
-        if (selectedLanguage === 'ko') {
-            return '한국어';
-        } else if (selectedLanguage === 'en') {
-            return 'English(United States)'
-        } else if (selectedLanguage === 'ja') {
-            return '日本語'
-        } else if (selectedLanguage === 'zh-CN') {
-            return '普通话(中国大陆)'
-        }
+        // console.log("voicePlaySwitch : ",this.state.voicePlaySwitch);
     }
     
     render() {
         const { classes, botName, userAvatarUrl, botAvatarUrl } = this.props;
+        const lastTalkIndex = this.props.chatList.length - 1;
 
         return (
             <Paper className={classes.paperChatBody} ref="panelBody">
                 <ul className={classes.chatTalkList}>
                     {this.props.chatList.map((chat, index) => (
-                        <li key={index} className={`${botName === chat.username ? classes.chatLiRight : classes.chatLiLeft} `}>
-                            <span className={`chat-img ${botName === chat.username ? classes.pullLeft : classes.floatRight} `}>
-                                <Avatar alt={`${chat.username}'s avatar pic`} 
-                                        src={`${botName === chat.username ? botAvatarUrl : userAvatarUrl}`} className={classes.avatar} />
-                            </span>
-                            <div className={classes.chatTalkBody}>
-                                {
-                                    (() => {
-                                        if (botName === chat.username) {
-                                            return (
-                                                <div>
-                                                    <div className="header">
-                                                        <strong className="primary-font">{chat.username}</strong>
-                                                        <small className={classes.floatRight}>
-                                                            <p className={classes.textMuted}>
-                                                                [{this.displayCurrentLanguage(chat.languageCode)}]
-                                                <i className="fa fa-clock-o fa-fw"></i> {chat.messageTime}
-                                                            </p>
-                                                        </small>
-                                                        {(this.state.voicePlaySwitch && !(index === 0)) && (
-                                                            <VoicePlayer
-                                                                play
-                                                                text={chat.content}
-                                                                lang={this.setVoiceLanguage(this.props.selectedTargetLanguage)}
-                                                            />
-                                                        )}
-                                                    </div>
-                                                    <div className={classes.responseTalkBox}>
-                                                        <p>{chat.content}</p>
-                                                    </div>
-                                                    <div className={classes.clear}></div>
-                                                </div>
-                                            )
-                                        } else {
-                                            return (
-                                                <div>
-                                                    <div className="header">
-                                                        <small className={classes.textMuted}>
-                                                            <i className="fa fa-clock-o fa-fw"></i> {chat.messageTime}
-                                                            [{this.displayCurrentLanguage(chat.languageCode)}]
-                                            </small>
-                                                        <strong className={classes.floatRight}>{chat.username}</strong>
-                                                        {/*
-                                            <VoicePlayer    
-                                                play
-                                                lang= "ko-KR"
-                                                text= {chat.content}
-                                            />
-                                            */}
-                                                    </div>
-                                                    <div className={classes.sendTalkBox}>
-                                                        <p>{chat.content}</p>
-                                                    </div>
-                                                    <div className={classes.clear}></div>
-                                                </div>
-                                            )
-                                        }
-                                    })()
-                                }
-                            </div>
-                        </li>
+                        <div key={index}>
+                            <Talk botName={botName}
+                                avatarUrl={`${botName === chat.username ? botAvatarUrl : userAvatarUrl}`}
+                                chat={chat}
+                                classes={classes}
+                            />
+                            {((botName === chat.username) && (lastTalkIndex === index) && !(index === 0)) &&
+                                <VoicePlayer
+                                    play
+                                    text={chat.content}
+                                    lang={chats.setVoiceLanguage(chat.languageCode)}
+                                />
+                            }
+
+                        </div>
                     ))}
                 </ul>
             </Paper>
@@ -233,10 +150,136 @@ class TalkList extends React.Component {
   }
 }
 
+{/**
+                        (() => {
+                            if (botName === chat.username) {
+                                return (
+                                    <li key={index} className={classes.chatLiLeft}>
+                                        <span className={`chat-img ${classes.pullLeft} `}>
+                                            <Avatar alt={`${chat.username}'s avatar pic`}
+                                                src={botAvatarUrl} className={classes.avatar} />
+                                        </span>
+                                        <div className={classes.chatTalkBody}>
+                                            <div>
+                                                <div className="header">
+                                                    <strong className="primary-font">{chat.username}</strong>
+                                                    <small className={classes.pullRight}>
+                                                        <p className={classes.textMuted}>
+                                                            [{this.displayCurrentLanguage(chat.languageCode)}]
+                                                            <i className="fa fa-clock-o fa-fw"></i>
+                                                             {chat.messageTime}
+                                                        </p>
+                                                    </small>
+                                                    {(lastTalkIndex && !(index === 0)) && (
+                                                        <VoicePlayer
+                                                            play
+                                                            text={chat.content}
+                                                            lang={this.setVoiceLanguage(chat.languageCode)}
+                                                        />
+                                                    )}
+                                                </div>
+                                                <div className={classes.responseTalkBox}>
+                                                    <p>{chat.content}</p>
+                                                </div>
+                                                <div className={classes.clear}></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                )
+                            } else {
+                                return (
+                                    <li key={index} className={classes.chatLiRight}>
+                                        <span className={`chat-img ${classes.pullRight} `}>
+                                            <Avatar alt={`${chat.username}'s avatar pic`}
+                                                src={userAvatarUrl} className={classes.avatar} />
+                                        </span>
+                                        <div className={classes.chatTalkBody}>
+                                            <div>
+                                                <div className="header">
+                                                    <small className={classes.textMuted}>
+                                                        <i className="fa fa-clock-o fa-fw"></i> {chat.messageTime}
+                                                        [{this.displayCurrentLanguage(chat.languageCode)}]
+                                                    </small>
+                                                    <strong className={classes.pullRight}>{chat.username}</strong>
+                                                </div>
+                                                <div className={classes.sendTalkBox}>
+                                                    <p>{chat.content}</p>
+                                                </div>
+                                                <div className={classes.clear}></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                )
+                            }
+                        })()
+
+*/}
+
+
+const Talk = withStyles(styles)(({ botName, avatarUrl, chat, classes }) => {
+    const {
+      username,
+      messageTime,
+      content,
+      languageCode,
+    } = chat;
+    if (botName === username) {
+        return (
+            <li className={classes.chatLiLeft}>
+                <span className={`chat-img ${classes.pullLeft} `}>
+                    <Avatar alt={`${username}'s avatar pic`}
+                        src={avatarUrl} className={classes.avatar} />
+                </span>
+                <div className={classes.chatTalkBody}>
+                    <div>
+                        <div className="header">
+                            <strong className="primary-font">{username}</strong>
+                            <small className={classes.pullRight}>
+                                <p className={classes.textMuted}>
+                                    [{chats.displayCurrentLanguage(languageCode)}]
+                                    <i className="fa fa-clock-o fa-fw"></i>
+                                    {messageTime}
+                                </p>
+                            </small>
+                        </div>
+                        <div className={classes.responseTalkBox}>
+                            <p>{chat.content}</p>
+                        </div>
+                        <div className={classes.clear}></div>
+                    </div>
+                </div>
+            </li>
+        )
+    } else {
+        return (
+            <li className={classes.chatLiRight}>
+                <span className={`chat-img ${classes.pullRight} `}>
+                    <Avatar alt={`${username}'s avatar pic`}
+                        src={avatarUrl} className={classes.avatar} />
+                </span>
+                <div className={classes.chatTalkBody}>
+                    <div>
+                        <div className="header">
+                            <small className={classes.textMuted}>
+                                <i className="fa fa-clock-o fa-fw"></i> {messageTime}
+                                [{chats.displayCurrentLanguage(languageCode)}]
+                                                    </small>
+                            <strong className={classes.pullRight}>{username}</strong>
+                        </div>
+                        <div className={classes.sendTalkBox}>
+                            <p>{content}</p>
+                        </div>
+                        <div className={classes.clear}></div>
+                    </div>
+                </div>
+            </li>
+        )
+    }
+
+});
+  
 const mapStateToProps = state => {
     return {
-        selectedSourceLanguage: state.chats.translationSettings.selectedSourceLanguage,
-        selectedTargetLanguage: state.chats.translationSettings.selectedTargetLanguage,
         chatList: state.chats.chatList,
     };
 }
