@@ -1,10 +1,14 @@
 import React from "react";
+import {connect} from 'react-redux';
+import { Link } from "react-router-dom";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Hidden from "@material-ui/core/Hidden";
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 // @material-ui/icons
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -12,11 +16,12 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 // core components
 import Button from "../CustomButtons/Button.jsx";
 
+import {auth} from "../../actions";
+
 import headerLinksStyle from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.jsx";
 
 class ArkwithHeaderLinks extends React.Component {
   state = {
-    auth: true,
     anchorEl: null
   };
   handleMenu = event => {
@@ -27,15 +32,25 @@ class ArkwithHeaderLinks extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  handleLogout = () => {
+    this.setState({ anchorEl: null });
+    this.props.logout();
+  };
+  
+  handleLoginPage = () => {
+    this.setState({ anchorEl: null });
+    //return <Redirect to="/login" />;
+  };
+
   render() {
     // eslint-disable-next-line react/prop-types
     const { classes } = this.props;
-    const { auth, anchorEl } = this.state;
+    const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    const linkStyle = { color: 'inherit' };
+
+    //let user = JSON.parse(localStorage.getItem('username'));
     return (
-      <div>
-        {auth && (
-          // eslint-disable-next-line react/jsx-no-comment-textnodes
           <div>
             <Button
               className={classes.buttonLink}
@@ -66,14 +81,45 @@ class ArkwithHeaderLinks extends React.Component {
               open={open}
               onClose={this.handleClose}
             >
-              <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-              <MenuItem onClick={this.handleClose}>My account</MenuItem>
+            {this.props.auth.isAuthenticated ? 
+              <div>
+              <MenuItem onClick={this.handleClose}>
+               <ListItemIcon>
+               <i className={"fas fa-user"} />
+               </ListItemIcon>
+               <Link style={ linkStyle } to="/user">&nbsp;&nbsp;&nbsp;&nbsp;Profile</Link>
+              </MenuItem>
+              <MenuItem onClick={this.handleLogout}>
+               <ListItemIcon>
+               <i className={"fas fa-sign-out-alt"} />
+               </ListItemIcon>
+               <ListItemText inset primary="Logout" />            
+              </MenuItem>
+              </div>
+              :
+              <MenuItem onClick={this.handleLoginPage}>
+               <ListItemIcon>
+               <i className={"fas fa-sign-in-alt"} />
+               </ListItemIcon>
+               <Link style={ linkStyle } to="/login">Login</Link>
+              </MenuItem>
+            }
             </Menu>
           </div>
-        )}
-      </div>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+      auth: state.auth,
+      user: state.auth.user,
+  }
+}
 
-export default withStyles(headerLinksStyle)(ArkwithHeaderLinks);
+const mapDispatchToProps = dispatch => {
+  return {
+      logout: () => dispatch(auth.logout()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(headerLinksStyle)(ArkwithHeaderLinks));

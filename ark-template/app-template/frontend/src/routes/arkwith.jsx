@@ -85,7 +85,7 @@ const arkwithRoutes = [
     icon: Unarchive,
     component: UpgradeToPro
   },
-  { redirect: true, path: "/", to: "/introarkwith", navbarName: "Redirect" }
+  { redirect: true, path: "/", to: "/introarkwith", navbarName: "Redirect" },
 ];
 
 export default arkwithRoutes;

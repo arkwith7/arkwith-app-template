@@ -53,6 +53,7 @@ export const login = (username, password) => {
             .then(res => {
                 if (res.status === 200) {
                     dispatch({type: 'LOGIN_SUCCESSFUL', data: res.data });
+                    localStorage.setItem('username', JSON.stringify(username));
                     return res.data;
                 } else if (res.status === 403 || res.status === 401) {
                     dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
@@ -120,6 +121,7 @@ export const logout = () => {
             .then(res => {
                 if (res.status === 204) {
                     dispatch({type: 'LOGOUT_SUCCESSFUL'});
+                    localStorage.removeItem("username");
                     return res.data;
                 } else if (res.status === 403 || res.status === 401) {
                     dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
