@@ -3,3 +3,19 @@
 git add README.md
 git commit -m "first commit"
 git push -u origin master
+
+conda vertual environment
+
+$ conda create --name env python=3.5
+
+# To activate this environment, use
+#
+#     $ conda activate env
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+Cannot uninstall 'certifi'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
+
+$ pip install pip==9.0.1
