@@ -31,23 +31,33 @@ We assume you have experience with back-end and front-end Web applications using
 
 ## How to Use
 
-To use this project, follow these steps:
+The Arkwith Starter Template start in an environment where node.js, npm, yarn, python anaconda are pre-installed. By installing the Arkwith Starter Template, you can see that the Front-End runs the React and the Back-End runs the Python Django Rest Framework.
 
-- Clone it
+To use this Arkwith Starter Template, follow these steps:
+
+Clone it
 - `$ git clone https://github.com/arkwith7/arkwith-app-template.git`
+
+First, go to the directory where the Front-End module of the Arkwith Starter Template is located, and install and run the React Application.
+- `$ cd arkwith-app-template`
+- `$ cd app-template/frontend`
+- `$ cd frontend`
+- `$ npm install`
+- `$ npm run start`
+
+Next, open another new command terminal window and move to the directory where the Back-End module is located. We then create a Python virtual environment to run the Python Django Rest Framework in a Python virtual environment and run the Django application there.
+
 - Create a virtual env for this project
 - `$ cd arkwith-app-template`
-- `$ pipenv install`
+- `$ pipenv install` (If pipenv is not installed, install it using `$ pip install pipenv`)
 - `$ pipenv shell`
 - Configure the development and execution environment.
 - `$ cd ark-template`
 - `$ pip install -r requirements.txt`
-- `$ cd app-template/frontend`
-- `$ npm install`
-- `$ npm run start`
-- Move to app-template directory, upper directory of current frontend directory
+- `$ cd app-template`
 - `$ python manage.py runserver`
 
+Normally, when Front-End and Back-End modules are executed, you can check that the tab menu of Home, Chat Translator and CRUD Sample App is displayed by connecting to http://localhost:8000 from the Chrome browser.
 
 ## License
 
