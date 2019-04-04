@@ -50,6 +50,8 @@ To use this project, follow these steps:
 -   Move to app-template directory, upper directory of current frontend directory
 -   `$ python manage.py runserver`
 
+http://localhost:8000/
+
 ## License
 
 [MIT License][mit]
