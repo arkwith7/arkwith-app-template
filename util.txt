@@ -1,5 +1,16 @@
 ## How to commit in github
 
+# How to add README.md into github(remote repository)
 git add README.md
 git commit -m "first commit"
 git push -u origin master
+
+# How to make a branch in local repository(developer computer)
+git checkout -b material_ui
+
+# How to make a branch in github(remote repository)
+git push origin material_ui
+
+# How to connect remote branch, material_ui
+git branch --set-upstream-to origin/material_ui
+

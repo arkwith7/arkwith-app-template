@@ -294,7 +294,9 @@ class ChatTranslator extends Component {
                         value={this.state.message}
                         onChange={(e) => this.setState({message: e.target.value})}
                         />
-                        <Button className="btn btn-sm btn-default" type="submit" name="send" id="send" >Send</Button>
+                        <Button className="btn btn-sm btn-default" type="submit" name="send" id="send" >
+                         <i className="fa fa-send fa-fw"></i>
+                        </Button>
 				    </InputGroup> 
 
                 </CardFooter>

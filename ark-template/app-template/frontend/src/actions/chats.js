@@ -1,15 +1,10 @@
-export const dropdownButtonToggle  = () => {
-  return {
-    type: 'OPEN_DROPDOWN',
-    //dropdownOpen,
-  }
-}
 
-export const requestTranslation = (username, message) => {
+export const requestTranslation = (username, message,languageCode) => {
   return {
     type: 'REQUEST_TRANSLATION',
     username,
     message,
+    languageCode,
   }
 }
 
@@ -42,6 +37,7 @@ export const getTranslation = (source, target, message) => {
         if (res.status === 200) {
           return dispatch({type: 'GET_TRANSLATION', 
                             message: res.data, 
+                            languageCode: target, 
                             statusCode: res.status,
                             statusMessage: 'success'
                           });
@@ -62,13 +58,6 @@ export const restartChatting = () => {
   }
 }
 
-//Open Modal
-export const openModal = () => {
-  return {
-    type: 'OPEN_MODAL',
-  }
-}
-
 //Set Translation Source Language
 export const setSourceLang = (sourceLang) => {
   return {
@@ -83,3 +72,31 @@ export const setTargetLang = (targetLang) => {
     targetLang,
   }
 }
+
+// change language code from naver to google  
+export const setVoiceLanguage = (selectedLanguage) => {
+
+  if (selectedLanguage === 'ko') {
+    return 'ko-KR';
+  } else if (selectedLanguage === 'en') {
+    return 'en-US'
+  } else if (selectedLanguage === 'ja') {
+    return 'ja-JP'
+  } else if (selectedLanguage === 'zh-CN') {
+    return 'zh-CN'//'cmn-Hans-CN'
+  }
+}
+// Display current language.
+export const displayCurrentLanguage = (selectedLanguage) => {
+
+  if (selectedLanguage === 'ko') {
+    return '한국어';
+  } else if (selectedLanguage === 'en') {
+    return 'English(United States)'
+  } else if (selectedLanguage === 'ja') {
+    return '日本語'
+  } else if (selectedLanguage === 'zh-CN') {
+    return '普通话(中国大陆)'
+  }
+}
+

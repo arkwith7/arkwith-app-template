@@ -1,6 +1,4 @@
 const initialState = {
-    dropdownOpen: false,
-    modal: false,
     translationSettings: {
         selectedSourceLanguage: 'ko',
         selectedTargetLanguage: 'en',
@@ -31,16 +29,8 @@ export default function chats(state=initialState, action) {
 
     switch (action.type) {
 
-        case 'OPEN_DROPDOWN':
-            //console.log("action.dropdownOpen :",state.dropdownOpen);
-            return {...state, dropdownOpen: !state.dropdownOpen };
-
         case 'RESTART_CHATTING':
         return {...state, chatList: [] };
-
-        case 'OPEN_MODAL':
-            //console.log("action.openModal :",state.modal);
-            return {...state, modal: !state.modal };
 
         case 'SET_SOURCE_LANG':
             //console.log("action.setSourceLang :",action.sourceLang);
@@ -61,12 +51,13 @@ export default function chats(state=initialState, action) {
                 } };
 
         case 'REQUEST_TRANSLATION':
-            //console.log("content :",action.message);
+            //console.log("REQUEST_TRANSLATION languageCode :",action.languageCode);
             return {...state, 
                 chatList: state.chatList.concat({
                     username: action.username,
                     messageTime: currentTime(), 
-                    content: action.message
+                    content: action.message,
+                    languageCode: action.languageCode
                 }) 
             };
 
@@ -80,37 +71,20 @@ export default function chats(state=initialState, action) {
                 chatList: state.chatList.concat({
                     username: "Translator Bot",
                     messageTime: currentTime(), 
-                    content: action.message
+                    content: action.message,
+                    languageCode: action.languageCode
                 }) 
             };
 
         case 'SERVER_ERROR':
         case 'AUTHENTICATION_ERROR':
-            //console.log("SERVER_ERROR action.statusCode :",action.statusCode);
+            console.log("SERVER_ERROR action.statusCode :",action.statusCode);
             //console.log("SERVER_ERROR action.data :",action.data);
             return {...state, 
                 translationStatus: {
                     code: action.statusCode,
                     message: action.statusMessage
                 }
-            };
-
-        case 'SPEECH_TO_TEXT':
-            return {...state, 
-                chatList: state.chatList.concat({
-                    username: action.username,
-                    messageTime: currentTime(), 
-                    content: action.text
-                }) 
-            };
-
-        case 'TEXT_TO_SPEECH':
-            return {...state, 
-                chatList: state.chatList.concat({
-                    username: action.username,
-                    messageTime: currentTime(), 
-                    content: action.text
-                }) 
             };
             
         default:
