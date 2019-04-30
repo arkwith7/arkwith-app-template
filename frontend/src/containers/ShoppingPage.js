@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import ProductList from '../components/ProductList'
-import { fetchProducts } from '../actions/Products'
-import { addToCart } from '../actions/Cart'
+import { fetchProducts } from '../store/actions/Products'
+import { addToCart } from '../store/actions/Cart'
 
 class ShoppingPage extends React.Component {
     componentDidMount() {

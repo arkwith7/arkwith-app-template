@@ -8,9 +8,9 @@ import jwtDecode from 'jwt-decode'
 
 import './index.css'
 import App from './containers/App'
-import rootReducer from './reducers/index'
+import rootReducer from './store/reducers/index'
 import registerServiceWorker from './registerServiceWorker'
-import { loginSuccess, setAuthorizationToken } from './actions/Auth'
+import { loginSuccess, setAuthorizationToken } from './store/actions/Auth'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

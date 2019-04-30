@@ -1,5 +1,10 @@
 $ python --version
 Python 3.5.2
 
+Check PostgreSQL and start database
+$ /etc/init.d/postgresql status
+9.5/main (port 5432): down
+$ sudo /etc/init.d/postgresql start
+ * Starting PostgreSQL 9.5 database server          [ OK ] 
 DB Account
 arkwith / arkwith

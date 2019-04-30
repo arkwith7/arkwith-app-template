@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom'
 import _ from 'lodash'
 
 import Account from '../components/Account'
-import { login, logout, userSignupRequest } from '../actions/Auth'
-import { fetchOrders, updateProduct, addNewProduct, deleteProduct } from '../actions/Account'
+import { login, logout, userSignupRequest } from '../store/actions/Auth'
+import { fetchOrders, updateProduct, addNewProduct, deleteProduct } from '../store/actions/Account'
 
 class AccountPage extends React.Component {
     componentDidMount() {

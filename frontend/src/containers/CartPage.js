@@ -9,10 +9,10 @@ import Cart from '../components/Cart'
 import Shipping from '../components/Shipping'
 import Billing from '../components/Billing'
 import Confirmation from '../components/Confirmation'
-import { removeFromCart, clearCart, placeOrder } from '../actions/Cart'
-import { setShippingOptions } from '../actions/Shipping'
-import { setBillingOptions } from '../actions/Billing'
-import { TOASTR_OPTIONS } from '../constants/Common'
+import { removeFromCart, clearCart, placeOrder } from '../store/actions/Cart'
+import { setShippingOptions } from '../store/actions/Shipping'
+import { setBillingOptions } from '../store/actions/Billing'
+import { TOASTR_OPTIONS } from '../store/constants/Common'
 toastr.options = TOASTR_OPTIONS
 
 class CartPage extends React.Component {
@@ -56,36 +56,36 @@ class CartPage extends React.Component {
         switch (this.state.step) {
             case 1:
                 return <Cart
-                            cart={this.props.cart}
-                            nextStep={this.nextStep}
-                            handleRemoveItem={this.handleRemoveItem}
-                            clearCart={this.props.clearCart}
-                        />
+                    cart={this.props.cart}
+                    nextStep={this.nextStep}
+                    handleRemoveItem={this.handleRemoveItem}
+                    clearCart={this.props.clearCart}
+                />
 
             case 2:
                 return <Shipping
-                            shipping={this.props.shipping}
-                            nextStep={this.nextStep}
-                            previousStep={this.previousStep}
-                            setShippingOptions={this.props.setShippingOptions}
-                        />
+                    shipping={this.props.shipping}
+                    nextStep={this.nextStep}
+                    previousStep={this.previousStep}
+                    setShippingOptions={this.props.setShippingOptions}
+                />
 
             case 3:
                 return <Billing
-                            billing={this.props.billing}
-                            nextStep={this.nextStep}
-                            previousStep={this.previousStep}
-                            setBillingOptions={this.props.setBillingOptions}
-                        />
+                    billing={this.props.billing}
+                    nextStep={this.nextStep}
+                    previousStep={this.previousStep}
+                    setBillingOptions={this.props.setBillingOptions}
+                />
 
             case 4:
                 return <Confirmation
-                            cart={this.props.cart}
-                            shipping={this.props.shipping}
-                            billing={this.props.billing}
-                            previousStep={this.previousStep}
-                            submit={this.submit}
-                        />
+                    cart={this.props.cart}
+                    shipping={this.props.shipping}
+                    billing={this.props.billing}
+                    previousStep={this.previousStep}
+                    submit={this.submit}
+                />
 
             default:
                 return

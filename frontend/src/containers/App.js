@@ -9,8 +9,8 @@ import Navbar from '../components/Navbar'
 import ShoppingPage from './ShoppingPage'
 import CartPage from './CartPage'
 import AccountPage from './AccountPage'
-import { filterProducts } from '../actions/Products'
-import { checkAuthorizationToken } from '../actions/Auth'
+import { filterProducts } from '../store/actions/Products'
+import { checkAuthorizationToken } from '../store/actions/Auth'
 
 const Main = () => {
     return (

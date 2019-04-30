@@ -4,7 +4,7 @@ import { Modal, Card, Image, Rating, Grid, Header, Divider, Button, Input } from
 import toastr from 'toastr'
 
 import './Product.css'
-import { TOASTR_OPTIONS } from '../constants/Common'
+import { TOASTR_OPTIONS } from '../store/constants/Common'
 toastr.options = TOASTR_OPTIONS
 
 class Product extends React.Component {
