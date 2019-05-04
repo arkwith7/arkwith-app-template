@@ -1,81 +1,45 @@
-/*eslint-disable*/
+/* eslint-disable */
 import React from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-import { List, ListItem, withStyles } from "@material-ui/core";
-
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
 
-import footerStyle from "assets/jss/material-kit-react/components/footerStyle.jsx";
+import footerStyle from "assets/jss/material-kit-pro-react/components/footerStyle.jsx";
 
-function Footer({ ...props }) {
-  const { classes, whiteFont } = props;
+function Footer(props) {
+  const { children, content, classes, theme, big, className } = props;
+  const themeType =
+    theme === "transparent" || theme == undefined ? false : true;
   const footerClasses = classNames({
     [classes.footer]: true,
-    [classes.footerWhiteFont]: whiteFont
+    [classes[theme]]: themeType,
+    [classes.big]: big || children !== undefined,
+    [className]: className !== undefined
   });
   const aClasses = classNames({
-    [classes.a]: true,
-    [classes.footerWhiteFont]: whiteFont
+    [classes.a]: true
   });
+
   return (
     <footer className={footerClasses}>
       <div className={classes.container}>
-        <div className={classes.left}>
-          <List className={classes.list}>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/"
-                className={classes.block}
-                target="_blank"
-              >
-                Creative Tim
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/presentation"
-                className={classes.block}
-                target="_blank"
-              >
-                About us
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="http://blog.creative-tim.com/"
-                className={classes.block}
-                target="_blank"
-              >
-                Blog
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/license"
-                className={classes.block}
-                target="_blank"
-              >
-                Licenses
-              </a>
-            </ListItem>
-          </List>
-        </div>
-        <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
-          <Favorite className={classes.icon} /> by{" "}
-          <a
-            href="https://www.creative-tim.com"
-            className={aClasses}
-            target="_blank"
-          >
-            Creative Tim
-          </a>{" "}
-          for a better web.
-        </div>
+        {children !== undefined ? (
+          <div>
+            <div className={classes.content}>{children}</div>
+            <hr />
+          </div>
+        ) : (
+          " "
+        )}
+        {content}
+        <div className={classes.clearFix} />
       </div>
     </footer>
   );
@@ -83,7 +47,9 @@ function Footer({ ...props }) {
 
 Footer.propTypes = {
   classes: PropTypes.object.isRequired,
-  whiteFont: PropTypes.bool
+  theme: PropTypes.oneOf(["dark", "white", "transparent"]),
+  big: PropTypes.bool,
+  content: PropTypes.node.isRequired
 };
 
 export default withStyles(footerStyle)(Footer);

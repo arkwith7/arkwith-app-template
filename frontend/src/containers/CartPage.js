@@ -5,14 +5,14 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import toastr from 'toastr'
 
-import Cart from '../components/Cart'
-import Shipping from '../components/Shipping'
-import Billing from '../components/Billing'
-import Confirmation from '../components/Confirmation'
-import { removeFromCart, clearCart, placeOrder } from '../store/actions/Cart'
-import { setShippingOptions } from '../store/actions/Shipping'
-import { setBillingOptions } from '../store/actions/Billing'
-import { TOASTR_OPTIONS } from '../store/constants/Common'
+import Cart from 'components/Cart'
+import Shipping from 'components/Shipping'
+import Billing from 'components/Billing'
+import Confirmation from 'components/Confirmation'
+import { removeFromCart, clearCart, placeOrder } from 'store/actions/Cart'
+import { setShippingOptions } from 'store/actions/Shipping'
+import { setBillingOptions } from 'store/actions/Billing'
+import { TOASTR_OPTIONS } from 'store/constants/Common'
 toastr.options = TOASTR_OPTIONS
 
 class CartPage extends React.Component {
